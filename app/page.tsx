@@ -1,103 +1,155 @@
 import Image from "next/image";
+import FadeInSection from "../components/FadeInSection";
+import ProjectsJson from "./projects.json";
+import Link from "next/link";
 
-export default function Home() {
+interface Project {
+    projectName : string,
+    projectDescription : string
+    link : string,
+}
+export default function Portfolio() {
+
+    const navSections : string[] = ['Home', 'About', 'Skills', 'Projects', 'Tickets', 'Contact'];
+
+    const skills : string [] = ["Next.js", "React", "Tailwind CSS", "Supabase", "JavaScript", "SCSS", "UI/UX", "Data Management"]
+
+    const projects: Project[] = ProjectsJson as Project[];
+
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="bg-white text-dark min-h-screen font-sans">
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Navbar */}
+      <nav className="flex justify-between items-center px-8 py-4 shadow-md sticky top-0 z-50 bg-white">
+        <h1 className="text-2xl font-bold text-primary">Essam Dhamri</h1>
+        <ul className="hidden md:flex gap-8 font-medium">
+          {navSections.map(link => (
+            <li key={link}>
+              <a
+                href={`#${link.toLowerCase()}`}
+                className="text-primary hover:text-accent transition-colors duration-300 "
+              >
+                {link}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      {/* Hero Section */}
+    <FadeInSection id="home" className="flex flex-col items-center justify-center text-center py-25 px-6 bg-gradient-to-b from-white to-light">
+    <div className="w-64 h-64 mb-6 relative rounded-full overflow-hidden border-4 border-primary shadow-md transition-all duration-300 hover:scale-105">
+        <Image src="/Avatar.png" alt="Essam Avatar" fill style={{ objectFit: "cover" }} />
+    </div>
+
+    <h2 className="text-4xl md:text-6xl font-extrabold text-dark mb-4 drop-shadow-sm">
+        Essam Abdullah Dhamri
+    </h2>
+
+    <p className="text-lg md:text-xl max-w-2xl text-gray-600 mb-6">
+        Web Developer specialized in React, Next.js, Tailwind, and Supabase. Passionate about clean code and user-friendly solutions.
+    </p>
+
+    <div className="grid grid-cols-3 sm:grid-cols-6 gap-6 mb-6">        
+        <Image src="/icons/Node.svg" alt="Node.js" width={48} height={48} className="hover:scale-110 transition-transform" />
+        <Image src="/icons/TS.svg" alt="TypeScript" width={48} height={48} className="hover:scale-110 transition-transform" />
+        <Image src="/icons/Next.svg" alt="Next.js" width={48} height={48} className="hover:scale-110 transition-transform" />
+        <Image src="/icons/React.svg" alt="React.js" width={48} height={48} className="hover:scale-110 transition-transform" />
+        <Image src="/icons/Tailwind.svg" alt="Tailwind CSS" width={48} height={48} className="hover:scale-110 transition-transform" />
+        <Image src="/icons/SCSS.svg" alt="SCSS" width={48} height={48} className="hover:scale-110 transition-transform" />
+    </div>
+
+    <a
+        href="#projects"
+        className="mt-6 px-8 py-3 bg-white text-primary rounded-full font-semibold hover:bg-primary hover:text-white transition-all duration-300 transform hover:scale-105 shadow-md"
+    >
+        View My Work
+    </a>
+    </FadeInSection>
+
+      {/* About Section */}
+      <FadeInSection id="about" className="px-6 py-20 max-w-5xl mx-auto text-center">
+        <h3 className="text-3xl font-bold text-primary mb-8 drop-shadow-sm">About Me</h3>
+        <p className="text-gray-600 leading-relaxed text-lg">
+          I am a Web Developer with hands-on experience in building responsive platforms using React, Next.js, and Tailwind. I successfully developed and manage the &quot;Telawah&quot; platform, improving data accessibility for 200+ users.
+        </p>
+        <Link
+          href="./Essam Abdullah Dhamri - Web Developer Resume.pdf"
+          target="_blank"
+          className="inline-block mt-8 px-8 py-3 bg-white text-accent rounded-full font-semibold hover:bg-accent hover:text-white transition-all duration-300 transform hover:scale-105 shadow-md"
+        >
+          Download CV
+        </Link>
+      </FadeInSection>
+
+      {/* Skills Section */}
+        <FadeInSection id="skills" className="px-6 py-20 bg-light text-center">
+        <h3 className="text-3xl font-bold text-primary mb-12 drop-shadow-sm">Skills</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+            {skills.map((skill, index) => (
+            <FadeInSection
+                key={skill}
+                className="group bg-white p-6 rounded-xl shadow hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 border border-gray-100 cursor-pointer"
+                delay={index * 0.15}
+            >
+                <p className="font-semibold text-lg text-dark group-hover:text-primary transition-colors duration-300">{skill}</p>
+            </FadeInSection>
+            ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        </FadeInSection>
+
+      {/* Projects Section */}
+        <FadeInSection id="projects" className="px-6 py-20 max-w-6xl mx-auto text-center">
+        <h3 className="text-3xl font-bold text-primary mb-12 drop-shadow-sm">Projects</h3>
+        <div className="grid md:grid-cols-2 gap-10">
+            {projects.map((project : Project, index : number) => (
+            <FadeInSection
+                key={index}
+                className="group bg-white p-6 rounded-xl shadow hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 border border-gray-100 text-left"
+                delay={index * 0.2} // stagger effect
+            >
+                <h4 className="text-xl font-bold mb-2 text-dark">{project.projectName}</h4>
+                <p className="text-gray-600 mb-4">{project.projectDescription}</p>
+                <div className="flex gap-4">
+                <Link href={project.link} className="px-5 py-2 bg-white text-primary rounded-full font-semibold hover:bg-primary hover:text-white transition-all duration-300 transform hover:scale-105" target="_blank">Visit</Link>
+                <Link href="#" className="px-5 py-2 bg-white text-accent rounded-full font-semibold hover:bg-accent hover:text-white transition-all duration-300 transform hover:scale-105" target="_blank">GitHub</Link>
+                </div>
+            </FadeInSection>
+            ))}
+        </div>
+        </FadeInSection>
+
+      {/* Tickets Section */}
+      <FadeInSection id="tickets" className="px-6 py-20 bg-light text-center">
+        <h3 className="text-3xl font-bold text-primary mb-12 drop-shadow-sm">Tickets</h3>
+        <p className="text-gray-500">Tickets will be fetched from Supabase (visible only when approved).</p>
+        <div className="mt-8 grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
+          {[1,2].map(ticket => (
+            <FadeInSection key={ticket} className="bg-white p-6 rounded-xl shadow border border-gray-100 text-left transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+              <h4 className="text-xl font-bold mb-2 text-dark">Ticket {ticket}</h4>
+              <p className="text-gray-600">This is a sample ticket fetched from Supabase.</p>
+            </FadeInSection>
+          ))}
+        </div>
+      </FadeInSection>
+
+      {/* Contact Section */}
+      <FadeInSection id="contact" className="px-6 py-20 max-w-4xl mx-auto text-center">
+        <h3 className="text-3xl font-bold text-primary mb-8 drop-shadow-sm">Contact</h3>
+        <p className="text-gray-600 mb-8">Feel free to reach out through the following channels:</p>
+        <div className="flex justify-center gap-8 text-lg font-medium">
+          <Link href="mailto:essada.dev@gmail.com" className="text-primary hover:text-accent transition-colors duration-300">Email</Link>
+          <Link href="https://www.linkedin.com/in/essam-dhamri-45aab9287/" className="text-primary hover:text-accent transition-colors duration-300">LinkedIn</Link>
+          <Link href="https://github.com/Eshada?tab=repositories" className="text-primary hover:text-accent transition-colors duration-300">GitHub</Link>
+        </div>
+      </FadeInSection>
+
+      {/* Footer */}
+      <footer className="bg-light py-6 text-center text-gray-500">
+        © 2025 Essam Abdullah Dhamri – All Rights Reserved
       </footer>
+
     </div>
   );
 }
